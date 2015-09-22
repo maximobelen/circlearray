@@ -2,7 +2,7 @@
 
 [![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
 
-An immutable size circle array structure!
+A circle(loop) array structure!
 
 ```js
 var CircleArray = require('circlearray');
@@ -42,6 +42,12 @@ circle2.add({value: 3});
 circle.size(); // This return 2
 //You can't add more elements that the max size
 
+
+//Remove elements!!
+circle.remove('key', 'value');
+
+// Or if its contains no objects like [1,2,3,4,5];
+circle2.remove(2);
 
 ```
 ## Usage
