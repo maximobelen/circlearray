@@ -55,6 +55,19 @@ CircleArray.prototype.next = function() {
 
 };
 
+CircleArray.prototype.remove = function(key, value) {
+  if(arguments.length  > 1){
+    removeByKey(key, value);
+  }else{
+    var index = array.indexOf(key);
+    if (index > -1) {
+      array.splice(index, 1);
+      maxSize = maxSize - 1;
+    }
+  }
+
+};
+
 CircleArray.prototype.currentElement = function() {
   return currentElement;
 };
@@ -83,4 +96,16 @@ CircleArray.prototype.isEmpty = function() {
 
 CircleArray.prototype.print = function() {
   return array.toString();
+};
+
+var removeByKey = function (key, value){
+  if(key && value){
+    var iterator = array.length;
+    while(iterator--){
+       if( array[iterator] && array[iterator].hasOwnProperty(key) && (array[iterator][key] === value) ){ 
+           array.splice(iterator,1);
+          maxSize = maxSize - 1;
+       }
+    }
+  }
 };
