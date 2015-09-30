@@ -7,7 +7,7 @@ A circle(loop) array structure!
 ```js
 var CircleArray = require('circlearray');
 
-var circle = new CircleArray(3);
+var circle = new CircleArray();
 
 circle.add({value: 1});
 circle.add({value: 2});
@@ -21,30 +21,26 @@ circle.add({value: 3});
 // You can define the circle array sending a param with a regular array. 
 var circle = new CircleArray([{value: 1}, {value: 2}, {value: 3}, {value: 4}]);
 
-circle.maxSize(); // This return 4
 circle.currentElement(); // this return the current element, by default is the element in the position 0
 circle.prev(); // This return element in position 4
 circle.prev(); // This return element in position 3
 circle.next(); // This return element in position 4
 circle.next(); // This return element in position 1
 circle.isEmpty(); // false
-circle.isFull(); // true
   
   
 var circle2 = new CircleArray(2);
-circle2.maxSize(); // This return 2
-circle.size(); // This return 0
+circle2.size(); // This return 0
 circle2.add({value: 1});
-circle.size(); // This return 1
+circle2.size(); // This return 1
 circle2.add({value: 2});
-circle.size(); // This return 2
-circle2.add({value: 3});
-circle.size(); // This return 2
-//You can't add more elements that the max size
+circle2.size(); // This return 2
 
+// You can add in a position.
+circle2.addInPosition(element, position);
 
 //Remove elements!!
-circle.remove('key', 'value');
+circle2.remove('key', 'value');
 
 // Or if its contains no objects like [1,2,3,4,5];
 circle2.remove(2);

@@ -1,33 +1,29 @@
 module.exports = CircleArray;
 
 var array = [];
-var currentElement = {};
+var currentElement;
 var currentIndex = -1;
-var maxSize = 0;
 
 function CircleArray(options) {
   if (!(this instanceof CircleArray))
     return new CircleArray(options);
 
-  if(typeof options == 'number'){
-    array = new Array(options);
-    maxSize = options;
-  }else{
-    if( Object.prototype.toString.call( options ) === '[object Array]' ) {
-      array = options;
-      maxSize = options.length;
-      currentElement = options[0];
-      currentIndex = 0;
-    }
+  if( Object.prototype.toString.call( options ) === '[object Array]' ) {
+    array = options;
+    currentElement = options[0];
   }
 }
 
 CircleArray.prototype.add = function(element) {
-  if(this.size() < maxSize){
-    currentIndex++;
-    array[currentIndex]= element;
+  if( typeof currentElement == 'undefined'){
     currentElement = element;
+    currentIndex = 0;
   }
+  array.push(element);
+};
+
+CircleArray.prototype.addInPosition = function(element, position) {
+  array.splice(position, 0, element);
 };
 
 CircleArray.prototype.prev = function() {
@@ -52,7 +48,6 @@ CircleArray.prototype.next = function() {
     currentElement = array[index+1];
     currentIndex = index+1;
   }
-
 };
 
 CircleArray.prototype.remove = function(key, value) {
@@ -62,10 +57,8 @@ CircleArray.prototype.remove = function(key, value) {
     var index = array.indexOf(key);
     if (index > -1) {
       array.splice(index, 1);
-      maxSize = maxSize - 1;
     }
   }
-
 };
 
 CircleArray.prototype.currentElement = function() {
@@ -82,14 +75,6 @@ CircleArray.prototype.size = function() {
   return count;
 };
 
-CircleArray.prototype.maxSize = function() {
-  return array.length;
-};
-
-CircleArray.prototype.isFull = function() {
-  return this.size() === maxSize ? true : false;
-};
-
 CircleArray.prototype.isEmpty = function() {
   return this.size() === 0;
 };
@@ -102,10 +87,9 @@ var removeByKey = function (key, value){
   if(key && value){
     var iterator = array.length;
     while(iterator--){
-       if( array[iterator] && array[iterator].hasOwnProperty(key) && (array[iterator][key] === value) ){ 
-           array.splice(iterator,1);
-          maxSize = maxSize - 1;
-       }
+      if( array[iterator] && array[iterator].hasOwnProperty(key) && (array[iterator][key] === value) ){ 
+        array.splice(iterator,1);
+      }
     }
   }
 };
