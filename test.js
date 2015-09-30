@@ -66,7 +66,7 @@ console.log("____________________________________");
 
 console.log("New Array [1,2,3,4,5]");
 
-var circle2 = new CircleArray([1,2,3,4,5]);
+var circle2 = new CircleArray([1, 2, 3, 4, 5]);
 
 console.log("Array Size " + circle2.size());
 circle2.remove(2);
